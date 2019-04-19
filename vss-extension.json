@@ -1,0 +1,73 @@
+{
+  "manifestVersion": 1,
+  "id": "artifacts-tagger",
+  "name": "Artifacts Tagger",
+  "version": "1.0.0",
+  "publisher": "dmitryserbin",
+  "public": true,
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "Tag deployed Azure DevOps master build artifact from release pipeline",
+  "categories": [
+    "Azure Pipelines"
+  ],
+  "tags": [
+    "Tag",
+    "Release",
+    "Build",
+    "Pipeline",
+    "Deploy",
+    "DevOps",
+    "Tasks"
+  ],
+  "icons": {
+    "default": "Images/icon.png"
+  },
+  "content": {
+    "details": {
+      "path": "readme.md"
+    },
+    "changelog": {
+      "path": "changelog.md"
+    },
+    "license": {
+      "path": "license.md"
+    }
+  },
+  "links": {
+    "getstarted": {
+      "uri": "https://github.com/dmitryserbin/azdev-artifacts-tagger"
+    },
+    "support": {
+      "uri": "https://github.com/dmitryserbin/azdev-artifacts-tagger/issues"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/dmitryserbin/azdev-artifacts-tagger"
+  },
+  "files": [
+    {
+      "path": "TaggerV1"
+    },
+    {
+      "path": "Images",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "artifacts-tagger",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "TaggerV1"
+      }
+    }
+  ]
+}
