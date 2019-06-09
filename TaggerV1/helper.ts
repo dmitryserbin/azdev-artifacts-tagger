@@ -52,7 +52,7 @@ export class Helper implements IHelper {
 
         const verbose = logger.extend("getDefinitionBuilds");
 
-        const result: bi.Build[] = await this.getBuildsRetry(projectName, [ definitionId ], [ tagName ]);
+        const result: bi.Build[] = await this.getBuildsRetry(projectName, definitionId, tagName);
 
         verbose(result);
 
@@ -99,11 +99,11 @@ export class Helper implements IHelper {
     }
 
     @Retry()
-    private async getBuildsRetry(projectName: string, definitions: number[], tags: string[]): Promise<bi.Build[]> {
+    private async getBuildsRetry(projectName: string, definitionId: number, tagName: string): Promise<bi.Build[]> {
 
         return await this.buildApi.getBuilds(
             projectName,
-            definitions,
+            [ definitionId ],
             undefined,
             undefined,
             undefined,
@@ -112,7 +112,7 @@ export class Helper implements IHelper {
             undefined,
             undefined,
             undefined,
-            tags);
+            [ tagName ]);
 
     }
 
