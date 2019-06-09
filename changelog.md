@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- Add retry mechanism
+
 ## 1.0.0
 
 - Add default release pipelines tags
