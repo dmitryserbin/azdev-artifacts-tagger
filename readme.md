@@ -55,4 +55,6 @@ Please refer to Azure DevOps [permissions and security roles documentation](http
 
 ## Support
 
-For aditional information and support please refer to [project repository](https://github.com/dmitryserbin/azdev-artifacts-tagger). For help with Azure DevOps and release pipelines please refer to [official documentation](https://docs.microsoft.com/en-us/azure/devops).
+For aditional information and support please refer to [project repository](https://github.com/dmitryserbin/azdev-artifacts-tagger). To enable debug mode to help troubleshooting issues, please configure `DEBUG=artifacts-tagger:*` custom release [variable](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/variables).
+
+For help with Azure DevOps and release pipelines please refer to [official documentation](https://docs.microsoft.com/en-us/azure/devops).
