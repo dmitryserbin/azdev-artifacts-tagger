@@ -15,7 +15,7 @@
   "author": "Dmitry Serbin",
   "license": "MIT",
   "dependencies": {
-    "azure-devops-node-api": "^9.0.0",
+    "azure-devops-node-api": "^8.0.0",
     "azure-pipelines-task-lib": "^2.8.0"
   },
   "devDependencies": {
