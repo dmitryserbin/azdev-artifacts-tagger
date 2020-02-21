@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Address endpoint not present issue ([#3](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/3))
+
 ## 1.1.0
 
 - Add retry mechanism
