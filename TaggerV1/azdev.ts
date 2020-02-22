@@ -4,15 +4,15 @@ import { IEndpoint, IParameters } from "./interfaces";
 
 export function getEndpoint(): IEndpoint {
 
-    const endpointType: string = tl.getInput("EndpointType", true);
+    const endpointType: string = tl.getInput("EndpointType", true)!;
 
-    let endpointName: string = "SystemVssConnection";
+    let endpointName: string = "SYSTEMVSSCONNECTION";
     let tokenParameterName: string = "AccessToken";
 
     // Get service endpoint
     if (endpointType === "service") {
 
-        endpointName = tl.getInput("ConnectedService", true);
+        endpointName = tl.getInput("ConnectedService", true)!;
         tokenParameterName = "ApiToken";
 
     }
@@ -20,7 +20,7 @@ export function getEndpoint(): IEndpoint {
     const endpoint: IEndpoint = {
 
         url: tl.getEndpointUrl(endpointName, false),
-        token: tl.getEndpointAuthorizationParameter(endpointName, tokenParameterName, false),
+        token: tl.getEndpointAuthorizationParameter(endpointName, tokenParameterName, false)!,
 
     };
 

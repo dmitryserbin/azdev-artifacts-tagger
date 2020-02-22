@@ -20,9 +20,9 @@
       "isExpanded": true
     },
     {
-        "name": "Advanced",
-        "displayName": "Advanced",
-        "isExpanded": true
+      "name": "Advanced",
+      "displayName": "Advanced",
+      "isExpanded": true
     }
   ],
   "inputs": [
@@ -87,8 +87,8 @@
     }
   ],
   "execution": {
-      "Node": {
-          "target": "index.js"
-      }
+    "Node": {
+        "target": "index.js"
+    }
   }
 }
