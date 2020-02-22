@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.1
+## 1.1.2
 
 - Address endpoint not present issue ([#3](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/3))
 
