@@ -13,10 +13,10 @@ async function run() {
     try {
 
         // Get endpoint
-        const endpoint: IEndpoint = await getEndpoint();
+        const endpoint: IEndpoint = getEndpoint();
 
         // Get parameters
-        const parameters: IParameters = await getParameters();
+        const parameters: IParameters = getParameters();
 
         // Create connection
         const connection: IConnection = new Connection(endpoint);
@@ -37,9 +37,9 @@ async function run() {
             }
         }
 
-    } catch (err) {
+    } catch (e: any) {
 
-        tl.setResult(tl.TaskResult.Failed, err.message);
+        tl.setResult(tl.TaskResult.Failed, e.message);
 
     }
 

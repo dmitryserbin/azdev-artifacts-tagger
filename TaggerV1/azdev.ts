@@ -19,7 +19,7 @@ export function getEndpoint(): IEndpoint {
 
     const endpoint: IEndpoint = {
 
-        url: tl.getEndpointUrl(endpointName, false),
+        url: tl.getEndpointUrl(endpointName, false)!,
         token: tl.getEndpointAuthorizationParameter(endpointName, tokenParameterName, false)!,
 
     };

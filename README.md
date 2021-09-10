@@ -1,10 +1,11 @@
 # Artifacts Tagger
 
-- [Overview](#Overview)
-- [Features](#Features)
-- [Prerequisites](#Prerequisites)
-- [How To Use](#How-To-Use)
-- [Support](#Support)
+- [Artifacts Tagger](#artifacts-tagger)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Prerequisites](#prerequisites)
+  - [How To Use](#how-to-use)
+  - [Support](#support)
 
 ## Overview
 
@@ -13,7 +14,6 @@ The **Artifacts Tagger** [extension](https://marketplace.visualstudio.com/items?
 Extension | Build | Code
 :-------|:-------|:-------
 [![Extension](https://vsmarketplacebadge.apphb.com/version/dmitryserbin.artifacts-tagger.svg)](https://marketplace.visualstudio.com/items?itemName=dmitryserbin.artifacts-tagger) | [![Build](https://dev.azure.com/dmitryserbin/Tagger/_apis/build/status/Tagger-master)](https://dev.azure.com/dmitryserbin/Tagger/_build/latest?definitionId=1) | [![CodeFactor](https://www.codefactor.io/repository/github/dmitryserbin/azdev-artifacts-tagger/badge)](https://www.codefactor.io/repository/github/dmitryserbin/azdev-artifacts-tagger)
-
 
 ## Features
 
