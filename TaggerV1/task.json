@@ -88,7 +88,7 @@
   ],
   "execution": {
     "Node": {
-      "target": "index.js"
+      "target": "task.js"
     }
   }
 }

@@ -1,6 +1,6 @@
 import Debug from "debug";
 
-const logger = Debug("release-orchestrator:Retry");
+const logger = Debug("artifacts-tagger:Retry");
 
 export interface IRetryOptions {
 

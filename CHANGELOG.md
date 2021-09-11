@@ -3,6 +3,8 @@
 ## 1.2.0
 
 - Add multiple artifacts support ([#TBU](TBU))
+- Add external artifact project support ([#TBU](TBU))
+- Internal task structure refactoring ([#TBU](TBU))
 
 ## 1.1.2
 

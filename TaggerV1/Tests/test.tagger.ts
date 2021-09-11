@@ -5,8 +5,9 @@ import * as TypeMoq from "typemoq";
 
 import * as bi from "azure-devops-node-api/interfaces/BuildInterfaces";
 
-import { IHelper, ITagger } from "../interfaces";
-import { Tagger } from "../tagger";
+import { ITagger } from "../interfaces/itagger";
+import { IBuildHelper } from "../interfaces/ibuildhelper";
+import { Tagger } from "../tagger/tagger";
 
 describe("Deployer", () => {
 
@@ -18,7 +19,7 @@ describe("Deployer", () => {
     const definitionId = 1;
 
     const consoleLog = console.log;
-    const helperMock = TypeMoq.Mock.ofType<IHelper>();
+    const helperMock = TypeMoq.Mock.ofType<IBuildHelper>();
 
     it("Should add build tag", async () => {
 
@@ -46,7 +47,7 @@ describe("Deployer", () => {
         console.log = () => { /* */ };
 
         // Run tagger
-        await tagger.addBuildTag(projectName, buildId, tagName);
+        await tagger.addTag(projectName, buildId, tagName);
 
         // Restore console output
         console.log = consoleLog;
@@ -77,7 +78,7 @@ describe("Deployer", () => {
         console.log = () => { /* */ };
 
         // Run tagger
-        await tagger.addBuildTag(projectName, buildId, tagName);
+        await tagger.addTag(projectName, buildId, tagName);
 
         // Restore console output
         console.log = consoleLog;
@@ -110,7 +111,7 @@ describe("Deployer", () => {
         console.log = () => { /* */ };
 
         // Run tagger
-        await tagger.removeDefinitionTag(projectName, definitionId, excludeBuildId, tagName);
+        await tagger.removeTag(projectName, definitionId, excludeBuildId, tagName);
 
         // Restore console output
         console.log = consoleLog;

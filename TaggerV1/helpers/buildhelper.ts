@@ -1,32 +1,32 @@
 import Debug from "debug";
 
-import * as ba from "azure-devops-node-api/BuildApi";
-import * as bi from "azure-devops-node-api/interfaces/BuildInterfaces";
+import { Build } from "azure-devops-node-api/interfaces/BuildInterfaces";
+import { IBuildApi } from "azure-devops-node-api/BuildApi";
 
-import { IHelper } from "./interfaces";
-import { Retry } from "./retry";
+import { IBuildHelper } from "../interfaces/ibuildhelper";
+import { Retry } from "../common/retry";
 
 const logger = Debug("artifacts-tagger:Helper");
 
-export class Helper implements IHelper {
+export class BuildHelper implements IBuildHelper {
 
-    private buildApi: ba.IBuildApi;
+    private buildApi: IBuildApi;
 
-    constructor(buildApi: ba.IBuildApi) {
+    constructor(buildApi: IBuildApi) {
 
         this.buildApi = buildApi;
 
     }
 
-    public async getBuild(projectName: string, buildId: number): Promise<bi.Build> {
+    public async getBuild(projectName: string, buildId: number): Promise<Build> {
 
         const verbose = logger.extend("getBuild");
 
-        const result: bi.Build = await this.getBuildRetry(projectName, buildId);
+        const result: Build = await this.getBuildRetry(projectName, buildId);
 
         if (!result) {
 
-            throw new Error(`Unable to find ${projectName} project ${buildId} build`);
+            throw new Error(`Unable to find <${projectName}> project <${buildId}> build`);
 
         }
 
@@ -48,11 +48,11 @@ export class Helper implements IHelper {
 
     }
 
-    public async getDefinitionBuilds(projectName: string, definitionId: number, tagName: string): Promise<bi.Build[]> {
+    public async getDefinitionBuilds(projectName: string, definitionId: number, tagName: string): Promise<Build[]> {
 
         const verbose = logger.extend("getDefinitionBuilds");
 
-        const result: bi.Build[] = await this.getBuildsRetry(projectName, definitionId, tagName);
+        const result: Build[] = await this.getBuildsRetry(projectName, definitionId, tagName);
 
         verbose(result);
 
@@ -60,11 +60,11 @@ export class Helper implements IHelper {
 
     }
 
-    public async addBuildTag(projectName: string, build: bi.Build, tagName: string): Promise<void> {
+    public async addBuildTag(projectName: string, build: Build, tagName: string): Promise<void> {
 
         const verbose = logger.extend("addBuildTag");
 
-        console.log(`Adding ${build.buildNumber!} build ${tagName} tag`);
+        console.log(`Adding <${build.buildNumber!}> build <${tagName}> tag`);
 
         const result = await this.buildApi.addBuildTag(projectName, build.id!, tagName);
 
@@ -72,11 +72,11 @@ export class Helper implements IHelper {
 
     }
 
-    public async deleteBuildTag(projectName: string, build: bi.Build, tagName: string): Promise<void> {
+    public async deleteBuildTag(projectName: string, build: Build, tagName: string): Promise<void> {
 
         const verbose = logger.extend("deleteBuildTag");
 
-        console.log(`Removing ${build.buildNumber} build ${tagName} tag`);
+        console.log(`Removing <${build.buildNumber}> build <${tagName}> tag`);
 
         const result = await this.buildApi.deleteBuildTag(projectName, build.id!, tagName);
 
@@ -85,7 +85,7 @@ export class Helper implements IHelper {
     }
 
     @Retry()
-    private async getBuildRetry(projectName: string, buildId: number): Promise<bi.Build> {
+    private async getBuildRetry(projectName: string, buildId: number): Promise<Build> {
 
         return await this.buildApi.getBuild(projectName, buildId);
 
@@ -99,7 +99,7 @@ export class Helper implements IHelper {
     }
 
     @Retry()
-    private async getBuildsRetry(projectName: string, definitionId: number, tagName: string): Promise<bi.Build[]> {
+    private async getBuildsRetry(projectName: string, definitionId: number, tagName: string): Promise<Build[]> {
 
         return await this.buildApi.getBuilds(
             projectName,
