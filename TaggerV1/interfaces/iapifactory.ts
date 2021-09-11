@@ -1,7 +1,7 @@
-import { IBuildApi } from "azure-devops-node-api/BuildApi";
+import { IBuildApiRetry } from "./ibuildapiretry";
 
 export interface IApiFactory {
 
-    createBuildApi(): Promise<IBuildApi>;
+    createBuildApi(): Promise<IBuildApiRetry>;
 
 }

@@ -1,9 +1,11 @@
-import { BuildApi, IBuildApi } from "azure-devops-node-api/BuildApi";
+import { BuildApi } from "azure-devops-node-api/BuildApi";
 import { WebApi, getPersonalAccessTokenHandler } from "azure-devops-node-api";
 import { IRequestOptions, IRequestHandler } from "azure-devops-node-api/interfaces/common/VsoBaseInterfaces";
 
 import { IEndpoint } from "../interfaces/iendpoint";
 import { IApiFactory } from "../interfaces/iapifactory";
+import { IBuildApiRetry } from "../interfaces/ibuildapiretry";
+import { BuildApiRetry } from "../extensions/buildapiretry";
 
 export class ApiFactory implements IApiFactory {
 
@@ -27,11 +29,12 @@ export class ApiFactory implements IApiFactory {
 
     }
 
-    public async createBuildApi(): Promise<IBuildApi> {
+    public async createBuildApi(): Promise<IBuildApiRetry> {
 
         const buildApi: BuildApi = await this.webApi.getBuildApi();
+        const buildApiRetry: IBuildApiRetry = new BuildApiRetry(buildApi);
 
-        return buildApi;
+        return buildApiRetry;
 
     }
 

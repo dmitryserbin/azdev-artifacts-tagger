@@ -4,7 +4,8 @@
 
 - Add multiple artifacts support ([#TBU](TBU))
 - Add external artifact project support ([#TBU](TBU))
-- Internal task structure refactoring ([#TBU](TBU))
+- Rafactor internal modules structure ([#TBU](TBU))
+- Refactor retry mechanism ([#TBU](TBU))
 
 ## 1.1.2
 

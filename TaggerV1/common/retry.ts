@@ -2,35 +2,25 @@ import Debug from "debug";
 
 const logger = Debug("artifacts-tagger:Retry");
 
-export interface IRetryOptions {
+export function Retryable(attempts: number = 10, timeout: number = 10000, empty: boolean = false): Function {
 
-    attempts: number;
-    timeout: number;
+    const debug = logger.extend("retryable");
 
-}
-
-// tslint:disable-next-line:ban-types
-export function Retry(options: IRetryOptions = { attempts: 10, timeout: 5000 }): Function {
-
-    const verbose = logger.extend("retry");
-
-    // tslint:disable-next-line:only-arrow-functions ban-types
     return function(target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
 
-        // tslint:disable-next-line:ban-types
         const originalMethod: Function = descriptor.value;
 
         descriptor.value = async function(...args: any[]) {
 
             try {
 
-                verbose(`Executing <${propertyKey}> with <${options.attempts}> retries`);
+                debug(`Executing <${propertyKey}> with <${attempts}> retries`);
 
-                return await retryAsync.apply(this, [originalMethod, args, options.attempts, options.timeout]);
+                return await retryAsync.apply(this, [originalMethod, args, attempts, timeout, empty]);
 
             } catch (e: any) {
 
-                e.message = `Failed retrying <${name}> for <${options.attempts}> times. ${e.message}`;
+                e.message = `Failed retrying <${propertyKey}> for <${attempts}> times. ${e.message}`;
 
                 throw e;
 
@@ -43,25 +33,43 @@ export function Retry(options: IRetryOptions = { attempts: 10, timeout: 5000 }):
 
 }
 
-// tslint:disable-next-line:ban-types
-async function retryAsync(target: Function, args: any[], attempts: number, timeout: number): Promise<any> {
+async function retryAsync(target: Function, args: any[], attempts: number, timeout: number, empty: boolean): Promise<any> {
 
-    const verbose = logger.extend("retryAsync");
+    const debug = logger.extend("retryAsync");
 
     try {
 
         // @ts-ignore
-        return await target.apply(this, args);
+        let result: any = await target.apply(this, args);
+
+        if (!result && empty) {
+
+            if (--attempts <= 0) {
+
+                throw new Error(`Empty result received`);
+
+            }
+
+            debug(`Retrying <${target.name}> (empty) in <${timeout / 1000}> seconds`);
+
+            await new Promise((resolve) => setTimeout(resolve, timeout));
+
+            // @ts-ignore
+            result = retryAsync.apply(this, [target, args, attempts, timeout, empty]);
+
+        }
+
+        return result;
 
     } catch (e: any) {
 
-        if (--attempts < 0) {
+        if (--attempts <= 0) {
 
             throw new Error(e);
 
         }
 
-        verbose(`Retrying <${target.name}> in <${timeout / 1000}> seconds`);
+        debug(`Retrying <${target.name}> (exception) in <${timeout / 1000}> seconds`);
 
         await new Promise((resolve) => setTimeout(resolve, timeout));
 
