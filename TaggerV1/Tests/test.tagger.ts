@@ -1,9 +1,8 @@
 import "mocha";
 
-import * as chai from "chai";
 import * as TypeMoq from "typemoq";
 
-import * as bi from "azure-devops-node-api/interfaces/BuildInterfaces";
+import { Build } from "azure-devops-node-api/interfaces/BuildInterfaces";
 
 import { ITagger } from "../interfaces/itagger";
 import { IBuildHelper } from "../interfaces/ibuildhelper";
@@ -35,7 +34,7 @@ describe("Tagger", () => {
             id: artifacMock.buildId,
             buildNumber,
 
-        } as bi.Build;
+        } as Build;
 
         const tagsMock = [
 
@@ -68,7 +67,7 @@ describe("Tagger", () => {
             id: artifacMock.buildId,
             buildNumber,
 
-        } as bi.Build;
+        } as Build;
 
         const tagsMock = [
 
@@ -99,16 +98,16 @@ describe("Tagger", () => {
             id: artifacMock.buildId,
             buildNumber,
 
-        } as bi.Build;
+        } as Build;
 
         const buildMockTwo = {
 
             id: 1,
             buildNumber: "My-Build-02",
 
-        } as bi.Build;
+        } as Build;
 
-        helperMock.setup((x) => x.getDefinitionBuilds(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber(), TypeMoq.It.isAnyString())).returns(() => Promise.resolve([ buildMockOne, buildMockTwo ] as bi.Build[]));
+        helperMock.setup((x) => x.getDefinitionBuilds(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber(), TypeMoq.It.isAnyString())).returns(() => Promise.resolve([ buildMockOne, buildMockTwo ] as Build[]));
 
         const tagger: ITagger = new Tagger(helperMock.target);
 

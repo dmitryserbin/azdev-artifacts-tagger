@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { IBuildHelper } from "./interfaces/ibuildhelper";
 import { IParameters } from "./interfaces/iparameters";
 import { IEndpoint } from "./interfaces/iendpoint";
