@@ -3,7 +3,7 @@ import { getBoolInput, getDelimitedInput, getEndpointAuthorizationParameter, get
 import { IParameters } from "../interfaces/iparameters";
 import { IArtifact } from "../interfaces/iartifact";
 import { IEndpoint } from "../interfaces/iendpoint";
-import { ITaskHelper } from "../interfaces/taskhelper";
+import { ITaskHelper } from "../interfaces/itaskhelper";
 
 export class TaskHelper implements ITaskHelper {
 

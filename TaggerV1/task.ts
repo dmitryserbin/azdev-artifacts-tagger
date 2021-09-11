@@ -1,14 +1,13 @@
-import { IBuildApi } from "azure-devops-node-api/BuildApi";
-
-import { BuildHelper } from "./helpers/buildhelper";
 import { IBuildHelper } from "./interfaces/ibuildhelper";
 import { IParameters } from "./interfaces/iparameters";
 import { IEndpoint } from "./interfaces/iendpoint";
 import { Tagger } from "./tagger/tagger";
-import { ITaskHelper } from "./interfaces/taskhelper";
+import { ITaskHelper } from "./interfaces/itaskhelper";
 import { TaskHelper } from "./helpers/taskhelper";
 import { IApiFactory } from "./interfaces/iapifactory";
 import { ApiFactory } from "./factories/apifactory";
+import { IHelperFactory } from "./interfaces/ihelperfactory";
+import { HelperFactory } from "./factories/helperfactory";
 
 async function run() {
 
@@ -20,29 +19,12 @@ async function run() {
         const parameters: IParameters = await taskHelper.getParameters();
 
         const apiFactory: IApiFactory = new ApiFactory(endpoint);
-        const buildApi: IBuildApi = await apiFactory.createBuildApi();
+        const helperFactory: IHelperFactory = new HelperFactory(apiFactory);
+        const buildHelper: IBuildHelper = await helperFactory.createBuildHelper();
 
-        const buildHelper: IBuildHelper = new BuildHelper(buildApi);
         const tagger = new Tagger(buildHelper);
 
-        for (const tag of parameters.tags) {
-
-            for (const artifact of parameters.artifacts) {
-
-                // Tag target build
-                await tagger.addTag(artifact.projectId, artifact.buildId, tag);
-
-                // Remove duplicated tag from
-                // All existing definition builds
-                if (parameters.remove) {
-
-                    await tagger.removeTag(artifact.projectId, artifact.definitionId, artifact.buildId, tag);
-
-                }
-
-            }
-
-        }
+        await tagger.tag(parameters.artifacts, parameters.tags, parameters.remove);
 
     } catch (error: any) {
 
