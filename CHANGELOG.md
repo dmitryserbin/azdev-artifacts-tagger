@@ -2,10 +2,10 @@
 
 ## 1.2.0
 
-- Add multiple artifacts support ([#TBU](TBU))
-- Add external artifact project support ([#TBU](TBU))
-- Rafactor internal modules structure ([#TBU](TBU))
-- Refactor retry mechanism ([#TBU](TBU))
+- Add multiple artifacts support ([#6](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/6))
+- Add external artifact project support
+- Rafactor internal modules structure
+- Refactor retry mechanism
 
 ## 1.1.2
 
