@@ -6,6 +6,7 @@
 - Add external artifact project support
 - Rafactor internal modules structure
 - Refactor retry mechanism
+- Update task to Node 10
 
 ## 1.1.2
 
