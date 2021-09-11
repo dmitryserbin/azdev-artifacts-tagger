@@ -122,7 +122,7 @@ export class TaskHelper implements ITaskHelper {
         }
 
         const buildArtifacts: string[] | undefined = artifactVariables.filter(
-            (i) => i.name.match("release.artifacts.*.type") && i.value == "Build")
+            (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
                 .map((i) => i.name.replace(".type", ""));
 
         for (const artifact of buildArtifacts) {
