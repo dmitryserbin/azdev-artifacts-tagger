@@ -8,24 +8,31 @@ import * as bi from "azure-devops-node-api/interfaces/BuildInterfaces";
 import { ITagger } from "../interfaces/itagger";
 import { IBuildHelper } from "../interfaces/ibuildhelper";
 import { Tagger } from "../tagger/tagger";
+import { IArtifact } from "../interfaces/iartifact";
 
-describe("Deployer", () => {
+describe("Tagger", () => {
 
-    const projectName = "My-Project";
+    const artifacMock: IArtifact = {
+
+        name: "My-Artifact",
+        projectId: "My-Project",
+        buildId: 1,
+        definitionId: 1,
+
+    };
+
     const tagName = "My-Tag-One";
-
-    const buildId = 1;
     const buildNumber = "My-Build-01";
-    const definitionId = 1;
 
     const consoleLog = console.log;
+
     const helperMock = TypeMoq.Mock.ofType<IBuildHelper>();
 
     it("Should add build tag", async () => {
 
         const buildMock = {
 
-            id: buildId,
+            id: artifacMock.buildId,
             buildNumber,
 
         } as bi.Build;
@@ -47,7 +54,7 @@ describe("Deployer", () => {
         console.log = () => { /* */ };
 
         // Run tagger
-        await tagger.addTag(projectName, buildId, tagName);
+        await tagger.addTag(artifacMock, tagName);
 
         // Restore console output
         console.log = consoleLog;
@@ -58,7 +65,7 @@ describe("Deployer", () => {
 
         const buildMock = {
 
-            id: buildId,
+            id: artifacMock.buildId,
             buildNumber,
 
         } as bi.Build;
@@ -78,7 +85,7 @@ describe("Deployer", () => {
         console.log = () => { /* */ };
 
         // Run tagger
-        await tagger.addTag(projectName, buildId, tagName);
+        await tagger.addTag(artifacMock, tagName);
 
         // Restore console output
         console.log = consoleLog;
@@ -87,11 +94,9 @@ describe("Deployer", () => {
 
     it("Should remove definition tag", async () => {
 
-        const excludeBuildId = buildId;
-
         const buildMockOne = {
 
-            id: buildId,
+            id: artifacMock.buildId,
             buildNumber,
 
         } as bi.Build;
@@ -111,7 +116,7 @@ describe("Deployer", () => {
         console.log = () => { /* */ };
 
         // Run tagger
-        await tagger.removeTag(projectName, definitionId, excludeBuildId, tagName);
+        await tagger.removeTag(artifacMock, tagName);
 
         // Restore console output
         console.log = consoleLog;

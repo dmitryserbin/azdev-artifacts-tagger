@@ -23,12 +23,12 @@ export class Tagger implements ITagger {
             for (const artifact of artifacts) {
 
                 // Tag target build
-                await this.addTag(artifact.projectId, artifact.buildId, tag);
+                await this.addTag(artifact, tag);
 
                 // Remove other builds tag
                 if (remove) {
 
-                    await this.removeTag(artifact.projectId, artifact.definitionId, artifact.buildId, tag);
+                    await this.removeTag(artifact, tag);
 
                 }
 
@@ -38,36 +38,36 @@ export class Tagger implements ITagger {
 
     }
 
-    public async addTag(projectName: string, buildId: number, tagName: string): Promise<void> {
+    public async addTag(artifact: IArtifact, tag: string): Promise<void> {
 
         // Get target build
-        const targetBuild: Build = await this.buildHelper.getBuild(projectName, buildId);
+        const targetBuild: Build = await this.buildHelper.getBuild(artifact.projectId, artifact.buildId);
 
         // Get target build tags
-        const targetBuildTags: string[] = await this.buildHelper.getBuildTags(projectName, buildId);
+        const targetBuildTags: string[] = await this.buildHelper.getBuildTags(artifact.projectId, artifact.buildId);
 
-        if (targetBuildTags.includes(tagName)) {
+        if (targetBuildTags.includes(tag)) {
 
-            console.log(`Build <${targetBuild.buildNumber}> already <${tagName}> tagged`);
+            console.log(`Build <${targetBuild.buildNumber}> already <${tag}> tagged`);
 
         } else {
 
             // Add build tag
-            await this.buildHelper.addBuildTag(projectName, targetBuild, tagName);
+            await this.buildHelper.addBuildTag(artifact.projectId, targetBuild, tag);
 
         }
 
     }
 
-    public async removeTag(projectName: string, definitionId: number, excludeBuildId: number, tagName: string): Promise<void> {
+    public async removeTag(artifact: IArtifact, tag: string): Promise<void> {
 
         // Get definition builds
-        const targetBuilds: Build[] = await this.buildHelper.getDefinitionBuilds(projectName, definitionId, tagName);
+        const targetBuilds: Build[] = await this.buildHelper.getDefinitionBuilds(artifact.projectId, artifact.definitionId, tag);
 
-        for (const build of targetBuilds.filter((i) => i.id !== excludeBuildId)) {
+        for (const build of targetBuilds.filter((i) => i.id !== artifact.buildId)) {
 
             // Remove build tag
-            await this.buildHelper.deleteBuildTag(projectName, build, tagName);
+            await this.buildHelper.deleteBuildTag(artifact.projectId, build, tag);
 
         }
     }
