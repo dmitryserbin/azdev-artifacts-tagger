@@ -1,5 +1,13 @@
+pr:
+  branches:
+    include:
+    - master
+
 pool:
   name: Default
+
+workspace:
+  clean: all
 
 steps:
 - task: Npm@1
