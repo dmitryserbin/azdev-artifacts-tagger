@@ -9,7 +9,7 @@
 
 ## Overview
 
-The **Artifacts Tagger** [extension](https://marketplace.visualstudio.com/items?itemName=dmitryserbin.artifacts-tagger) adds a task to Azure DevOps to tag deployed **master** build artifact from a release pipeline.
+The **Artifacts Tagger** [extension](https://marketplace.visualstudio.com/items?itemName=dmitryserbin.artifacts-tagger) adds a task to Azure DevOps to tag **all** deployed **build** artifacts from a release pipeline.
 
 Extension | Build | Code
 :-------|:-------|:-------
@@ -48,7 +48,7 @@ Please refer to Azure DevOps [permissions and security roles documentation](http
 ## How To Use
 
 1. Add **Artifacts Tagger** task to your release pipeline
-2. Select 'Integrated Endpoint' or 'Service Endpoint' endpoint type
+2. Select `Integrated Endpoint` or `Service Endpoint` endpoint type
 3. Select default or specify custom tags to add to master build artifact
 
 > You may need to create a new Azure Pipelines [service connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints) using [PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate) token.
