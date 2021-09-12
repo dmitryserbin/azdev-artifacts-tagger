@@ -4,8 +4,15 @@ parameters:
   output: ""
 
 steps:
-- powershell: '@(".git*", ".vs*", "CI", "TaggerV1\ts*.json", "TaggerV1\.eslintrc", "TaggerV1\tests") | ForEach-Object { Remove-Item -Path $_ -Force -Recurse -ErrorAction SilentlyContinue }'
+- task: DeleteFiles@1
   displayName: Clean artifact
+  inputs:
+    contents: |
+      CI
+      TaggerV1/**/*.ts
+      TaggerV1/ts*.json
+      TaggerV1/tests
+    removeDotFiles: true
 
 - task: TfxInstaller@3
   displayName: Install TFX CLI
