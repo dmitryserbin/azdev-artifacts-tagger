@@ -1,9 +1,10 @@
 
 parameters:
   path: ""
+  output: ""
 
 steps:
-- powershell: '@(".git*", ".vs*", "CI", "TaggerV1\ts*.json", "TaggerV1\tests", "TaggerV1\test-*.xml") | ForEach-Object { Remove-Item -Path $_ -Force -Recurse -ErrorAction SilentlyContinue }'
+- powershell: '@(".git*", ".vs*", "CI", "TaggerV1\ts*.json", "TaggerV1\.eslintrc", "TaggerV1\tests") | ForEach-Object { Remove-Item -Path $_ -Force -Recurse -ErrorAction SilentlyContinue }'
   displayName: Clean artifact
 
 - task: TfxInstaller@3
@@ -14,4 +15,4 @@ steps:
   inputs:
     rootFolder: ${{ parameters.path }}
     updateTasksVersion: true
-    outputVariable: extensionPath
+    outputVariable: ${{ parameters.output }}

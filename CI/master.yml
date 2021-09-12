@@ -22,6 +22,7 @@ steps:
 - template: templates/package.yml
   parameters:
     path: $(Build.SourcesDirectory)
+    output: extensionPath
 
 - publish: $(extensionPath)
   displayName: Publish artifact
