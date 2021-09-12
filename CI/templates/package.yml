@@ -15,7 +15,6 @@ steps:
       TaggerV1/.eslintrc
       TaggerV1/ts*.json
       TaggerV1/tests
-    removeDotFiles: true
 
 - task: TfxInstaller@3
   displayName: Install TFX CLI
