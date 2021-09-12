@@ -18,6 +18,7 @@ steps:
       TaggerV1/.eslintrc
       TaggerV1/ts*.json
       TaggerV1/tests
+      TaggerV1/*!(node_modules)/**/*.ts
 
 - task: PackageAzureDevOpsExtension@3
   displayName: Package extension
