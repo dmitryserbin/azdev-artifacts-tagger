@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r ts-node/register Tests/**/test.*.ts --no-timeouts --reporter mocha-multi-reporters --reporter-options configFile=mocha.json",
+    "lint": "eslint . --ext .ts",
+    "test": "mocha -r ts-node/register tests/*.test.ts --no-timeouts --reporter mocha-multi-reporters --reporter-options configFile=tests/config.json",
     "clean": "npm prune --production"
   },
   "author": "Dmitry Serbin",

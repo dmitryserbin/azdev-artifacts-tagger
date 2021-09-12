@@ -10,26 +10,10 @@ workspace:
   clean: all
 
 steps:
-- task: Npm@1
-  displayName: Restore packages
-  inputs:
-    workingDir: TaggerV1
-
-- task: Npm@1
-  displayName: Run build
-  inputs:
-    command: custom
-    workingDir: TaggerV1
-    customCommand: run build
-
-- task: Npm@1
-  displayName: Run tests
-  inputs:
-    command: custom
-    workingDir: TaggerV1
-    customCommand: run test
-
-- task: PublishTestResults@2
-  displayName: Publish test results
-  inputs:
-    testResultsFiles: '**/test-*.xml'
+- template: templates/build.yml
+  parameters:
+    path: TaggerV1
+    restore: true
+    lint: true
+    build: true
+    test: true

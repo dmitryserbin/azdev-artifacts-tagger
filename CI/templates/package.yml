@@ -1,0 +1,17 @@
+
+parameters:
+  path: ""
+
+steps:
+- powershell: '@(".git*", ".vs*", "CI", "TaggerV1\ts*.json", "TaggerV1\tests", "TaggerV1\test-*.xml") | ForEach-Object { Remove-Item -Path $_ -Force -Recurse -ErrorAction SilentlyContinue }'
+  displayName: Clean artifact
+
+- task: TfxInstaller@3
+  displayName: Install TFX CLI
+
+- task: PackageAzureDevOpsExtension@3
+  displayName: Package extension
+  inputs:
+    rootFolder: ${{ parameters.path }}
+    updateTasksVersion: true
+    outputVariable: extensionPath
