@@ -33,6 +33,9 @@
     "changelog": {
       "path": "CHANGELOG.md"
     },
+    "privacy": {
+      "path": "PRIVACY.md"
+    },
     "license": {
       "path": "LICENSE"
     }
