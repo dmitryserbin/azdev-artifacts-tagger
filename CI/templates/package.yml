@@ -4,8 +4,11 @@ parameters:
   output: ""
 
 steps:
+- task: TfxInstaller@3
+  displayName: Install TFX CLI
+
 - task: DeleteFiles@1
-  displayName: Clean artifact
+  displayName: Clean extension
   inputs:
     contents: |
       .git
@@ -15,9 +18,6 @@ steps:
       TaggerV1/.eslintrc
       TaggerV1/ts*.json
       TaggerV1/tests
-
-- task: TfxInstaller@3
-  displayName: Install TFX CLI
 
 - task: PackageAzureDevOpsExtension@3
   displayName: Package extension
