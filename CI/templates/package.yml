@@ -5,7 +5,7 @@ parameters:
 
 steps:
 - task: TfxInstaller@3
-  displayName: Install TFX CLI
+  displayName: Install Node CLI
 
 - task: DeleteFiles@1
   displayName: Clean extension
