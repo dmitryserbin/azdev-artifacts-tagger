@@ -8,8 +8,9 @@ steps:
   displayName: Clean artifact
   inputs:
     contents: |
+      .git
+      .vscode
       CI
-      TaggerV1/**/*.ts
       TaggerV1/ts*.json
       TaggerV1/tests
     removeDotFiles: true
