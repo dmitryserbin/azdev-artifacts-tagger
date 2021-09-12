@@ -10,7 +10,9 @@ steps:
     contents: |
       .git
       .vscode
+      .gitignore
       CI
+      TaggerV1/.eslintrc
       TaggerV1/ts*.json
       TaggerV1/tests
     removeDotFiles: true
