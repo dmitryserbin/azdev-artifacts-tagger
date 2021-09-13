@@ -22,6 +22,7 @@ steps:
 - template: templates/package.yml
   parameters:
     path: $(Build.SourcesDirectory)
+    version: $(Build.BuildId)
     output: extensionPath
 
 - publish: $(extensionPath)
