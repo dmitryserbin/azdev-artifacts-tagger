@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "artifacts-tagger",
   "name": "Artifacts Tagger",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "publisher": "dmitryserbin",
   "public": true,
   "targets": [
@@ -32,6 +32,9 @@
     },
     "changelog": {
       "path": "CHANGELOG.md"
+    },
+    "privacy": {
+      "path": "PRIVACY.md"
     },
     "license": {
       "path": "LICENSE"

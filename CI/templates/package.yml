@@ -1,0 +1,25 @@
+parameters:
+  path: ""
+  output: ""
+
+steps:
+- task: TfxInstaller@3
+  displayName: Install TFX CLI
+
+- task: DeleteFiles@1
+  displayName: Clean extension
+  inputs:
+    contents: |
+      .git
+      .vscode
+      .gitignore
+      CI
+      TaggerV1/.eslintrc
+      TaggerV1/ts*.json
+      TaggerV1/tests
+
+- task: PackageAzureDevOpsExtension@3
+  displayName: Package extension
+  inputs:
+    rootFolder: ${{ parameters.path }}
+    outputVariable: ${{ parameters.output }}

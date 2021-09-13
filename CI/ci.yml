@@ -1,0 +1,19 @@
+pr:
+  branches:
+    include:
+    - master
+
+pool:
+  name: Default
+
+workspace:
+  clean: all
+
+steps:
+- template: templates/build.yml
+  parameters:
+    path: TaggerV1
+    restore: true
+    lint: true
+    build: true
+    test: true
