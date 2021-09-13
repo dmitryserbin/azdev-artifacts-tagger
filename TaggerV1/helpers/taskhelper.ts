@@ -48,7 +48,7 @@ export class TaskHelper implements ITaskHelper {
 
         if (!artifacts.length) {
 
-            throw new Error(`No build artifacts detected`);
+            throw new Error(`No pipeline artifacts detected`);
 
         }
 
