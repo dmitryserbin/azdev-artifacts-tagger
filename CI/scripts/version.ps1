@@ -1,13 +1,13 @@
 [CmdletBinding()]
 Param
 (
-	[Parameter(Mandatory=$True)]
+	[Parameter(Mandatory = $True)]
 	[String]$Path,
 
-	[Parameter(Mandatory=$True)]
+	[Parameter(Mandatory = $True)]
 	[Int]$Patch,
 
-	[Parameter(Mandatory=$False)]
+	[Parameter(Mandatory = $False)]
 	[Switch]$UpdateBuildNumber
 )
 

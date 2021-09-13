@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "artifacts-tagger",
   "name": "Artifacts Tagger",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "dmitryserbin",
   "public": true,
   "targets": [
@@ -54,7 +54,7 @@
   },
   "files": [
     {
-      "path": "TaggerV1"
+      "path": "Tasks"
     },
     {
       "path": "Images",
@@ -69,7 +69,7 @@
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "TaggerV1"
+        "name": "Tasks"
       }
     }
   ]

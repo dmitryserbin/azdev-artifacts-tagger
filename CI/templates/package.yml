@@ -26,9 +26,9 @@ steps:
       .vscode
       .gitignore
       CI
-      TaggerV1/.eslintrc
-      TaggerV1/ts*.json
-      TaggerV1/tests
+      Tasks/TaggerV1/.eslintrc
+      Tasks/TaggerV1/ts*.json
+      Tasks/TaggerV1/tests
 
 - task: PackageAzureDevOpsExtension@3
   displayName: Package extension
