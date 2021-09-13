@@ -17,3 +17,9 @@ steps:
     lint: true
     build: true
     test: true
+
+- template: templates/package.yml
+  parameters:
+    path: $(Build.SourcesDirectory)
+    version: $(Build.BuildId)
+    output: extensionPath
