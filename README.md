@@ -1,11 +1,10 @@
 # Artifacts Tagger
 
-- [Artifacts Tagger](#artifacts-tagger)
-  - [Overview](#overview)
-  - [Features](#features)
-  - [Prerequisites](#prerequisites)
-  - [How To Use](#how-to-use)
-  - [Support](#support)
+- [Overview](#overview)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [How To Use](#how-to-use)
+- [Support](#support)
 
 ## Overview
 
@@ -19,7 +18,7 @@ Extension | Build | Code
 
 The **Artifacts Tagger** task adds various [default](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/variables?view=azure-devops) or custom tags to deployed with release pipeline master build artifact.
 
-It uses either **integrated** (SystemVssConnection) or **user-defined**  personal access token (PAT) Azure DevOps service endpoint to connect to projects' pipelines.
+It uses either **integrated** or **user-defined**  personal access token (PAT) Azure DevOps service endpoint to connect to projects' pipelines.
 
 - Add current stage name tag
 - Add current release name tag
