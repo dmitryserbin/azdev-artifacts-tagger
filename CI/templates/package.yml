@@ -34,4 +34,5 @@ steps:
   displayName: Package extension
   inputs:
     rootFolder: ${{ parameters.path }}
-    outputVariable: ${{ parameters.output }}
+    ${{ if ne(parameters.output, '') }}:
+      outputVariable: ${{ parameters.output }}

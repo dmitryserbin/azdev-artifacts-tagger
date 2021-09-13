@@ -22,4 +22,3 @@ steps:
   parameters:
     path: $(Build.SourcesDirectory)
     version: $(Build.BuildId)
-    output: extensionPath
