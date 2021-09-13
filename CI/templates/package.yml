@@ -5,7 +5,18 @@ parameters:
 
 steps:
 - task: TfxInstaller@3
-  displayName: Install TFX CLI
+  displayName: Install Node CLI
+
+- task: PowerShell@2
+  displayName: Version extension
+  inputs:
+    targetType: filePath
+    filePath: CI/scripts/version.ps1
+    arguments: >
+      -Path ${{ parameters.path }}
+      -Patch ${{ parameters.version }}
+      -UpdateBuildNumber
+    pwsh: true
 
 - task: DeleteFiles@1
   displayName: Clean extension
@@ -18,17 +29,6 @@ steps:
       TaggerV1/.eslintrc
       TaggerV1/ts*.json
       TaggerV1/tests
-
-- task: PowerShell@2
-  displayName: Version extension
-  inputs:
-    targetType: filePath
-    filePath: CI/scripts/version.ps1
-    arguments: >
-      -Path ${{ parameters.path }}
-      -Patch ${{ parameters.version }}
-      -UpdateBuildNumber
-    pwsh: true
 
 - task: PackageAzureDevOpsExtension@3
   displayName: Package extension
