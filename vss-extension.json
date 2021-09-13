@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "artifacts-tagger",
   "name": "Artifacts Tagger",
-  "version": "1.2.1",
+  "version": "1.2.0",
   "publisher": "dmitryserbin",
   "public": true,
   "targets": [
