@@ -29,6 +29,6 @@ steps:
   displayName: Publish artifact
   artifact: Extension
 
-- publish: $(Build.SourcesDirectory)/TaggerV1
+- publish: $(Build.SourcesDirectory)/Tasks
   displayName: Publish artifact
-  artifact: Task
+  artifact: Tasks
