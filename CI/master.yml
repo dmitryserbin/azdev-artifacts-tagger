@@ -12,7 +12,7 @@ workspace:
 steps:
 - template: templates/build.yml
   parameters:
-    path: TaggerV1
+    path: Tasks/TaggerV1
     restore: true
     lint: true
     build: true
@@ -22,12 +22,13 @@ steps:
 - template: templates/package.yml
   parameters:
     path: $(Build.SourcesDirectory)
+    version: $(Build.BuildId)
     output: extensionPath
 
 - publish: $(extensionPath)
   displayName: Publish artifact
   artifact: Extension
 
-- publish: $(Build.SourcesDirectory)/TaggerV1
+- publish: $(Build.SourcesDirectory)/Tasks
   displayName: Publish artifact
-  artifact: Task
+  artifact: Tasks

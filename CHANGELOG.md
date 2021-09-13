@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.0
+## 1.2.*
 
 - Add multiple artifacts support ([#6](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/6))
 - Add external artifact project support
@@ -8,15 +8,12 @@
 - Refactor retry mechanism
 - Update task to Node 10
 
-## 1.1.2
+## 1.1.*
 
 - Address endpoint not present issue ([#3](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/3))
-
-## 1.1.0
-
 - Add retry mechanism
 
-## 1.0.0
+## 1.0.*
 
 - Add default release pipelines tags
 - Add user-specified tags

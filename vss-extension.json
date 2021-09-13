@@ -54,7 +54,7 @@
   },
   "files": [
     {
-      "path": "TaggerV1"
+      "path": "Tasks"
     },
     {
       "path": "Images",
@@ -69,7 +69,7 @@
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "TaggerV1"
+        "name": "Tasks"
       }
     }
   ]

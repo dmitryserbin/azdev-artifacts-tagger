@@ -12,8 +12,13 @@ workspace:
 steps:
 - template: templates/build.yml
   parameters:
-    path: TaggerV1
+    path: Tasks/TaggerV1
     restore: true
     lint: true
     build: true
     test: true
+
+- template: templates/package.yml
+  parameters:
+    path: $(Build.SourcesDirectory)
+    version: $(Build.BuildId)
