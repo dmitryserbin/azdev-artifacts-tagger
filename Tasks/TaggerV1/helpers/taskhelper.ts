@@ -106,7 +106,9 @@ export class TaskHelper implements ITaskHelper {
 
         const variables: VariableInfo[] | undefined = getVariables();
 
-        if (!variables) {
+        console.log(variables);
+
+        if (variables.length <= 0) {
 
             throw new Error(`No pipeline variables detected`);
 
@@ -115,7 +117,9 @@ export class TaskHelper implements ITaskHelper {
         const artifactVariables: VariableInfo[] | undefined = variables.filter(
             (i) => i.name.startsWith("release.artifacts"));
 
-        if (!artifactVariables) {
+        console.log(artifactVariables);
+
+        if (artifactVariables.length <= 0) {
 
             throw new Error(`No release artifact variables detected`);
 
@@ -125,7 +129,9 @@ export class TaskHelper implements ITaskHelper {
             (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
                 .map((i) => i.name.replace(".type", ""));
 
-        if (releaseArtifacts) {
+        console.log(releaseArtifacts);
+
+        if (releaseArtifacts.length) {
 
             for (const artifact of releaseArtifacts) {
 
