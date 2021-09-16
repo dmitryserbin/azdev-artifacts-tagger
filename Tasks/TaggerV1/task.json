@@ -29,7 +29,7 @@
     {
       "name": "EndpointType",
       "type": "radio",
-      "label": "Azure DevOps Endpoint Type",
+      "label": "Azure DevOps endpoint type",
       "helpMarkDown": "Select endpoint type to connect Azure DevOps: \nIntegrated = default 'SystemVssConnection' service endpoint for 'Project Collection Build Service' user account; \nService = user-defined personal access token (PAT) service endpoint \n\nNote: requires 'View builds', 'View build definition' and 'Update build information' build pipeline permissions",
       "options": {
         "integrated": "Integrated Endpoint",
@@ -41,7 +41,7 @@
     {
       "name": "ConnectedService",
       "type": "connectedService:ExternalTfs",
-      "label": "Service Endpoint",
+      "label": "Service endpoint",
       "helpMarkDown": "Select service endpoint for Azure DevOps account",
       "visibleRule": "EndpointType = service",
       "required": true
@@ -50,7 +50,7 @@
       "name": "StageNameTag",
       "type": "boolean",
       "label": "Add stage name tag",
-      "helpMarkDown": "Tag all build artifacts with current stage name (use 'Release.EnvironmentName' variable)",
+      "helpMarkDown": "Tag all release build artifacts with current stage name (use 'Release.EnvironmentName' variable, only works in release pipeline)",
       "defaultValue": true,
       "groupName": "Tags",
       "required": false
@@ -59,7 +59,7 @@
       "name": "ReleaseNameTag",
       "type": "boolean",
       "label": "Add release name tag",
-      "helpMarkDown": "Tag all build artifacts with current release name (use 'Release.ReleaseName' variable)",
+      "helpMarkDown": "Tag all release build artifacts with current release name (use 'Release.ReleaseName' variable, only works in release pipeline)",
       "defaultValue": false,
       "groupName": "Tags",
       "required": false
@@ -68,7 +68,7 @@
       "name": "CustomTags",
       "type": "multiLine",
       "label": "Specify custom tags",
-      "helpMarkDown": "Tag all build artifacts with specified custom tags (new line separated)",
+      "helpMarkDown": "Tag all release build artifacts (release pipeline) or current build (build pipeline) with specified custom tags (new line separated)",
       "properties": {
         "rows": 6,
         "maxLength": 1000
