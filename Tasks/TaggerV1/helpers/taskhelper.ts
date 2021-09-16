@@ -160,7 +160,7 @@ export class TaskHelper implements ITaskHelper {
 
             const buildId: string | undefined = getVariable("Build.BuildId");
             const definitionName: string | undefined = getVariable("Build.DefinitionName");
-            const definitionId: string | undefined = getVariable("Build.DefinitionId");
+            const definitionId: string | undefined = getVariable("System.DefinitionId");
             const projectId: string | undefined = getVariable("System.TeamProjectId");
 
             if (!buildId) {
