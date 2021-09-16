@@ -3,7 +3,7 @@
   "name": "artifactstagger",
   "friendlyName": "Artifacts Tagger",
   "instanceNameFormat": "Tag Release Artifact",
-  "description": "Tag deployed Azure DevOps build artifacts from release pipeline",
+  "description": "Tag Azure DevOps build artifacts from a release or build pipeline",
   "helpMarkDown": "For aditional information and support please refer to <https://github.com/dmitryserbin/azdev-artifacts-tagger> project repository.",
   "category": "Release",
   "author": "Dmitry Serbin",
@@ -50,7 +50,7 @@
       "name": "StageNameTag",
       "type": "boolean",
       "label": "Add stage name tag",
-      "helpMarkDown": "Tag all release build artifacts with current stage name (use 'Release.EnvironmentName' variable, only works in release pipeline)",
+      "helpMarkDown": "Tag all build artifacts with current stage name (use 'Release.EnvironmentName' variable, only works in release pipeline)",
       "defaultValue": true,
       "groupName": "Tags",
       "required": false
@@ -59,7 +59,7 @@
       "name": "ReleaseNameTag",
       "type": "boolean",
       "label": "Add release name tag",
-      "helpMarkDown": "Tag all release build artifacts with current release name (use 'Release.ReleaseName' variable, only works in release pipeline)",
+      "helpMarkDown": "Tag all build artifacts with current release name (use 'Release.ReleaseName' variable, only works in release pipeline)",
       "defaultValue": false,
       "groupName": "Tags",
       "required": false
@@ -68,7 +68,7 @@
       "name": "CustomTags",
       "type": "multiLine",
       "label": "Specify custom tags",
-      "helpMarkDown": "Tag all release build artifacts (release pipeline) or current build (build pipeline) with specified custom tags (new line separated)",
+      "helpMarkDown": "Tag all build artifacts (release pipeline) or current build (build pipeline) with specified tags (new line separated)",
       "properties": {
         "rows": 6,
         "maxLength": 1000

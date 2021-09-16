@@ -8,7 +8,7 @@
 
 ## Overview
 
-The **Artifacts Tagger** [extension](https://marketplace.visualstudio.com/items?itemName=dmitryserbin.artifacts-tagger) adds a task to Azure DevOps to tag **all** deployed **build** artifacts from a release pipeline or tag current build pipeline artifact.
+The **Artifacts Tagger** [extension](https://marketplace.visualstudio.com/items?itemName=dmitryserbin.artifacts-tagger) adds a task to Azure DevOps to tag all build artifacts in a classic release pipeline or tag current build in a classic build pipeline.
 
 Extension | Build | Code
 :-------|:-------|:-------
@@ -16,12 +16,12 @@ Extension | Build | Code
 
 ## Features
 
-The **Artifacts Tagger** task adds various [default](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/variables?view=azure-devops) or custom tags to deployed with release pipeline build artifacts or current build pipeline artifact.
+The **Artifacts Tagger** task adds various [default](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/variables?view=azure-devops) or user-defined tags to all build artifacts in a classic release pipeline or current build in a classic build pipeline.
 
 It uses either **integrated** or **user-defined**  personal access token (PAT) Azure DevOps service endpoint to connect to projects' pipelines.
 
-- Add current stage name tag
-- Add current release name tag
+- Add current stage name tag (release pipeline only)
+- Add current release name tag (release pipeline only)
 - Add user-defined tags
 - Remove duplicated tags
 

@@ -10,7 +10,7 @@
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "Tag deployed Azure DevOps master build artifact from release pipeline",
+  "description": "Tag Azure DevOps build artifacts from a release or build pipeline",
   "categories": [
     "Azure Pipelines"
   ],
@@ -19,9 +19,7 @@
     "Release",
     "Build",
     "Pipeline",
-    "Deploy",
-    "DevOps",
-    "Tasks"
+    "Deploy"
   ],
   "icons": {
     "default": "Images/icon.png"
