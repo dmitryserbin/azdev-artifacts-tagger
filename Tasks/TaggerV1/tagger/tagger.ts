@@ -16,7 +16,7 @@ export class Tagger implements ITagger {
 
     public async tag(artifacts: IArtifact[], tags: string[], remove: boolean): Promise<void> {
 
-        console.log(`Tagging <${artifacts.length}> build artifacts with <${tags.length}> tags`);
+        console.log(`Tagging <${artifacts.length}> build artifacts with <${tags.length}> tag(s)`);
 
         for (const tag of tags) {
 
