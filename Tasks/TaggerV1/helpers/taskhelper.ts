@@ -106,8 +106,6 @@ export class TaskHelper implements ITaskHelper {
 
         const variables: VariableInfo[] | undefined = getVariables();
 
-        console.log(variables);
-
         if (variables.length <= 0) {
 
             throw new Error(`No pipeline variables detected`);
@@ -117,55 +115,45 @@ export class TaskHelper implements ITaskHelper {
         const artifactVariables: VariableInfo[] | undefined = variables.filter(
             (i) => i.name.startsWith("release.artifacts"));
 
-        console.log(artifactVariables);
+        if (artifactVariables.length) {
 
-        if (artifactVariables.length <= 0) {
-
-            throw new Error(`No release artifact variables detected`);
-
-        }
-
-        const releaseArtifacts: string[] | undefined = artifactVariables.filter(
-            (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
-                .map((i) => i.name.replace(".type", ""));
-
-        console.log(releaseArtifacts);
-
-        if (releaseArtifacts.length) {
+            const releaseArtifacts: string[] | undefined = artifactVariables.filter(
+                (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
+                    .map((i) => i.name.replace(".type", ""));
 
             for (const artifact of releaseArtifacts) {
 
                 const buildId: string | undefined = getVariable(`${artifact}.buildId`);
                 const definitionId: string | undefined = getVariable(`${artifact}.definitionId`);
                 const projectId: string | undefined = getVariable(`${artifact}.projectId`);
-    
+
                 if (!buildId) {
-    
+
                     throw new Error(`Variable <${artifact}.buildId> is empty`);
-    
+
                 }
-    
+
                 if (!definitionId) {
-    
+
                     throw new Error(`Variable <${artifact}.definitionId> is empty`);
-    
+
                 }
-    
+
                 if (!projectId) {
-    
+
                     throw new Error(`Variable <${artifact}.projectId> is empty`);
-    
+
                 }
-    
+
                 artifacts.push({
-    
+
                     name: artifact,
                     buildId: Number(buildId),
                     definitionId: Number(definitionId),
                     projectId,
-    
+
                 } as IArtifact);
-    
+
             }
 
         } else {
