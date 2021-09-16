@@ -161,7 +161,7 @@ export class TaskHelper implements ITaskHelper {
             const buildId: string | undefined = getVariable("Build.BuildId");
             const definitionName: string | undefined = getVariable("Build.DefinitionName");
             const definitionId: string | undefined = getVariable("Build.DefinitionId");
-            const projectId: string | undefined = getVariable("System.TeamProject");
+            const projectId: string | undefined = getVariable("System.TeamProjectId");
 
             if (!buildId) {
 
@@ -183,7 +183,7 @@ export class TaskHelper implements ITaskHelper {
 
             if (!projectId) {
 
-                throw new Error(`Variable <System.TeamProject> is empty`);
+                throw new Error(`Variable <System.TeamProjectId> is empty`);
 
             }
 
