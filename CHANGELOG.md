@@ -2,6 +2,7 @@
 
 ## 1.2.*
 
+- Add build pipeline artifact support ([#12](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/12))
 - Add multiple artifacts support ([#6](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/6))
 - Add external artifact project support
 - Rafactor internal modules structure
