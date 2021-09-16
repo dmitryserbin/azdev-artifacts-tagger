@@ -106,46 +106,90 @@ export class TaskHelper implements ITaskHelper {
 
         const variables: VariableInfo[] | undefined = getVariables();
 
-        if (!variables) {
+        if (Array.isArray(variables) && variables.length <= 0) {
 
-            throw new Error(`No release variables detected`);
+            throw new Error(`No pipeline variables detected`);
 
         }
 
         const artifactVariables: VariableInfo[] | undefined = variables.filter(
             (i) => i.name.startsWith("release.artifacts"));
 
-        if (!artifactVariables) {
+        if (Array.isArray(artifactVariables) && artifactVariables.length) {
 
-            throw new Error(`No release artifact variables detected`);
+            const releaseArtifacts: string[] | undefined = artifactVariables.filter(
+                (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
+                    .map((i) => i.name.replace(".type", ""));
 
-        }
+            for (const artifact of releaseArtifacts) {
 
-        const buildArtifacts: string[] | undefined = artifactVariables.filter(
-            (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
-                .map((i) => i.name.replace(".type", ""));
+                const buildId: string | undefined = getVariable(`${artifact}.buildId`);
+                const definitionId: string | undefined = getVariable(`${artifact}.definitionId`);
+                const projectId: string | undefined = getVariable(`${artifact}.projectId`);
 
-        for (const artifact of buildArtifacts) {
+                if (!buildId) {
 
-            const buildId: string | undefined = getVariable(`${artifact}.buildId`);
-            const definitionId: string | undefined = getVariable(`${artifact}.definitionId`);
-            const projectId: string | undefined = getVariable(`${artifact}.projectId`);
+                    throw new Error(`Variable <${artifact}.buildId> is empty`);
+
+                }
+
+                if (!definitionId) {
+
+                    throw new Error(`Variable <${artifact}.definitionId> is empty`);
+
+                }
+
+                if (!projectId) {
+
+                    throw new Error(`Variable <${artifact}.projectId> is empty`);
+
+                }
+
+                artifacts.push({
+
+                    name: artifact,
+                    buildId: Number(buildId),
+                    definitionId: Number(definitionId),
+                    projectId,
+
+                } as IArtifact);
+
+            }
+
+        } else {
+
+            const buildId: string | undefined = getVariable("Build.BuildId");
+            const definitionName: string | undefined = getVariable("Build.DefinitionName");
+            const definitionId: string | undefined = getVariable("System.DefinitionId");
+            const projectId: string | undefined = getVariable("System.TeamProjectId");
 
             if (!buildId) {
 
-                throw new Error(`Variable <${artifact}.buildId> is empty`);
+                throw new Error(`Variable <Build.BuildId> is empty`);
+
+            }
+
+            if (!definitionName) {
+
+                throw new Error(`Variable <Build.DefinitionName> is empty`);
 
             }
 
             if (!definitionId) {
 
-                throw new Error(`Variable <${artifact}.definitionId> is empty`);
+                throw new Error(`Variable <Build.DefinitionId> is empty`);
+
+            }
+
+            if (!projectId) {
+
+                throw new Error(`Variable <System.TeamProjectId> is empty`);
 
             }
 
             artifacts.push({
 
-                name: artifact,
+                name: definitionName,
                 buildId: Number(buildId),
                 definitionId: Number(definitionId),
                 projectId,
