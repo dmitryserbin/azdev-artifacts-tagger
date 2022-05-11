@@ -4,7 +4,7 @@ parameters:
 
 jobs:
 - ${{ if eq(parameters.task, true) }}:
-  - job: ${{ variables.taskName }}
+  - job: Task
     pool:
       name: Default
     workspace:
@@ -32,7 +32,7 @@ jobs:
     - template: variables.yml
     dependsOn:
     - ${{ if eq(parameters.task, true) }}:
-      - ${{ variables.taskName }}
+      - Task
     steps:
     - template: steps/package.yml
       parameters:
