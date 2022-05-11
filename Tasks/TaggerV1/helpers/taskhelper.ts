@@ -52,14 +52,32 @@ export class TaskHelper implements ITaskHelper {
 
         }
 
+        const isBuildPipeline: boolean = await this.isBuildPipeline();
+
         // Get stage name
         if (stageNameTag) {
 
-            const stageName = getVariable("Release.EnvironmentName");
+            let stageName: string | undefined;
 
-            if (!stageName) {
+            if (isBuildPipeline) {
 
-                throw new Error(`Variable <Release.EnvironmentName> is empty`);
+                stageName = getVariable("System.StageName");
+
+                if (!stageName) {
+
+                    throw new Error(`Variable <System.StageName> is empty`);
+
+                }
+
+            } else {
+
+                stageName = getVariable("Release.EnvironmentName");
+
+                if (!stageName) {
+
+                    throw new Error(`Variable <Release.EnvironmentName> is empty`);
+                }
+
             }
 
             tags.push(stageName);
@@ -69,11 +87,28 @@ export class TaskHelper implements ITaskHelper {
         // Get release name
         if (releaseNameTag) {
 
-            const releaseName = getVariable("Release.ReleaseName");
+            let releaseName: string | undefined;
 
-            if (!releaseName) {
+            if (isBuildPipeline) {
 
-                throw new Error(`Variable <Release.ReleaseName> is empty`);
+                releaseName = getVariable("Build.Number");
+
+                if (!releaseName) {
+
+                    throw new Error(`Variable <Build.Number> is empty`);
+
+                }
+
+            } else {
+
+                releaseName = getVariable("Release.ReleaseName");
+
+                if (!releaseName) {
+
+                    throw new Error(`Variable <Release.ReleaseName> is empty`);
+
+                }
+
             }
 
             tags.push(releaseName);
@@ -205,6 +240,28 @@ export class TaskHelper implements ITaskHelper {
     public async fail(message: string): Promise<void> {
 
         setResult(TaskResult.Failed, message);
+
+    }
+
+    private async isBuildPipeline(): Promise<boolean> {
+
+        const hostType = getVariable("System.HostType");
+
+        if (!hostType) {
+
+            throw new Error(`Variable <System.HostType> is empty`);
+
+        }
+
+        if (hostType === "build") {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
 
     }
 
