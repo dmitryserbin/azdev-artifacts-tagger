@@ -18,6 +18,6 @@ jobs:
           parameters:
             path: ${{ variables.extensionArtifactPath }}
             endpointName: ${{ variables.marketplaceEndpoint }}
-            visibility: ${{ variables.extensionPreviewShareWith }}
+            visibility: ${{ variables.extensionPreviewVisibility }}
             shareWith: ${{ variables.extensionPreviewShareWith }}
             tag: preview
