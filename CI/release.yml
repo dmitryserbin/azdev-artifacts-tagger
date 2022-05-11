@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - Tasks/*
+
+stages:
+- stage: Build
+  jobs:
+  - template: templates/build.yml
+    parameters:
+      task: true
+      extension: true
+
+- stage: Preview
+  dependsOn:
+  - Build
+  jobs:
+  - template: templates/preview.yml
+    parameters:
+      environmentName: Marketplace
+
+- stage: Release
+  dependsOn:
+  - Build
+  - Preview
+  jobs:
+  - template: templates/release.yml
+    parameters:
+      environmentName: Marketplace
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
