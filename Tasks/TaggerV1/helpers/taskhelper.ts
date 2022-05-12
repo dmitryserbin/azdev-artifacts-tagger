@@ -1,4 +1,4 @@
-import { getBoolInput, getDelimitedInput, getEndpointAuthorizationParameter, getEndpointUrl, getInput, getVariable, getVariables, setResult, TaskResult, VariableInfo } from "azure-pipelines-task-lib/task";
+import { TaskResult, VariableInfo, getBoolInput, getDelimitedInput, getEndpointAuthorizationParameter, getEndpointUrl, getInput, getVariable, getVariables, setResult } from "azure-pipelines-task-lib/task";
 
 import { IParameters } from "../interfaces/iparameters";
 import { IArtifact } from "../interfaces/iartifact";
@@ -11,23 +11,51 @@ export class TaskHelper implements ITaskHelper {
 
     public async getEndpoint(): Promise<IEndpoint> {
 
-        const endpointType: string = getInput("EndpointType", true)!;
+        const endpointType: string | undefined = getInput("EndpointType", true);
 
-        let endpointName: string = "SYSTEMVSSCONNECTION";
-        let tokenParameterName: string = "AccessToken";
+        if (!endpointType) {
+
+            throw new Error("Unable to get endpoint type parameter");
+
+        }
+
+        let endpointName: string | undefined = "SYSTEMVSSCONNECTION";
+        let tokenParameterName = "AccessToken";
 
         // Get service endpoint
         if (endpointType === "service") {
 
-            endpointName = getInput("ConnectedService", true)!;
+            endpointName = getInput("ConnectedService", true);
+
+            if (!endpointName) {
+
+                throw new Error("Unable to get endpoint name parameter");
+
+            }
+
             tokenParameterName = "ApiToken";
+
+        }
+
+        const endpointUrl = getEndpointUrl(endpointName, false);
+        const endpointAuthorizationParameter = getEndpointAuthorizationParameter(endpointName, tokenParameterName, false);
+
+        if (!endpointUrl) {
+
+            throw new Error("Unable to get endpoint URL");
+
+        }
+
+        if (!endpointAuthorizationParameter) {
+
+            throw new Error("Unable to get endpoint authorization parameter");
 
         }
 
         const endpoint: IEndpoint = {
 
-            url: getEndpointUrl(endpointName, false)!,
-            token: getEndpointAuthorizationParameter(endpointName, tokenParameterName, false)!,
+            url: endpointUrl,
+            token: endpointAuthorizationParameter,
 
         };
 
@@ -48,18 +76,37 @@ export class TaskHelper implements ITaskHelper {
 
         if (!artifacts.length) {
 
-            throw new Error(`No pipeline artifacts detected`);
+            throw new Error("No pipeline artifacts detected");
 
         }
+
+        const isBuildPipeline: boolean = await this.isBuildPipeline();
 
         // Get stage name
         if (stageNameTag) {
 
-            const stageName = getVariable("Release.EnvironmentName");
+            let stageName: string | undefined;
 
-            if (!stageName) {
+            if (isBuildPipeline) {
 
-                throw new Error(`Variable <Release.EnvironmentName> is empty`);
+                stageName = getVariable("System.StageName");
+
+                if (!stageName) {
+
+                    throw new Error("Variable <System.StageName> is empty");
+
+                }
+
+            } else {
+
+                stageName = getVariable("Release.EnvironmentName");
+
+                if (!stageName) {
+
+                    throw new Error("Variable <Release.EnvironmentName> is empty");
+
+                }
+
             }
 
             tags.push(stageName);
@@ -69,11 +116,28 @@ export class TaskHelper implements ITaskHelper {
         // Get release name
         if (releaseNameTag) {
 
-            const releaseName = getVariable("Release.ReleaseName");
+            let releaseName: string | undefined;
 
-            if (!releaseName) {
+            if (isBuildPipeline) {
 
-                throw new Error(`Variable <Release.ReleaseName> is empty`);
+                releaseName = getVariable("Build.Number");
+
+                if (!releaseName) {
+
+                    throw new Error("Variable <Build.Number> is empty");
+
+                }
+
+            } else {
+
+                releaseName = getVariable("Release.ReleaseName");
+
+                if (!releaseName) {
+
+                    throw new Error("Variable <Release.ReleaseName> is empty");
+
+                }
+
             }
 
             tags.push(releaseName);
@@ -98,6 +162,7 @@ export class TaskHelper implements ITaskHelper {
             remove: removeDuplicates,
 
         } as IParameters;
+
     }
 
     public async getArtifacts(): Promise<IArtifact[]> {
@@ -108,7 +173,7 @@ export class TaskHelper implements ITaskHelper {
 
         if (Array.isArray(variables) && variables.length <= 0) {
 
-            throw new Error(`No pipeline variables detected`);
+            throw new Error("No pipeline variables detected");
 
         }
 
@@ -117,9 +182,9 @@ export class TaskHelper implements ITaskHelper {
 
         if (Array.isArray(artifactVariables) && artifactVariables.length) {
 
-            const releaseArtifacts: string[] | undefined = artifactVariables.filter(
-                (i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
-                    .map((i) => i.name.replace(/\.type$/g, ""));
+            const releaseArtifacts: string[] | undefined = artifactVariables
+                .filter((i) => i.name.match("release.artifacts.*.type") && i.value === "Build")
+                .map((i) => i.name.replace(/\.type$/g, ""));
 
             for (const artifact of releaseArtifacts) {
 
@@ -165,25 +230,25 @@ export class TaskHelper implements ITaskHelper {
 
             if (!buildId) {
 
-                throw new Error(`Variable <Build.BuildId> is empty`);
+                throw new Error("Variable <Build.BuildId> is empty");
 
             }
 
             if (!definitionName) {
 
-                throw new Error(`Variable <Build.DefinitionName> is empty`);
+                throw new Error("Variable <Build.DefinitionName> is empty");
 
             }
 
             if (!definitionId) {
 
-                throw new Error(`Variable <Build.DefinitionId> is empty`);
+                throw new Error("Variable <Build.DefinitionId> is empty");
 
             }
 
             if (!projectId) {
 
-                throw new Error(`Variable <System.TeamProjectId> is empty`);
+                throw new Error("Variable <System.TeamProjectId> is empty");
 
             }
 
@@ -205,6 +270,28 @@ export class TaskHelper implements ITaskHelper {
     public async fail(message: string): Promise<void> {
 
         setResult(TaskResult.Failed, message);
+
+    }
+
+    private async isBuildPipeline(): Promise<boolean> {
+
+        const hostType = getVariable("System.HostType");
+
+        if (!hostType) {
+
+            throw new Error("Variable <System.HostType> is empty");
+
+        }
+
+        if (hostType === "build") {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
 
     }
 

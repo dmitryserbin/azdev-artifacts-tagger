@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.*
+
+- Add extended YAML pipelines support ([#16](https://github.com/dmitryserbin/azdev-artifacts-tagger/pull/16))
+
 ## 1.2.*
 
 - Add build pipeline artifact support ([#12](https://github.com/dmitryserbin/azdev-artifacts-tagger/issues/12))

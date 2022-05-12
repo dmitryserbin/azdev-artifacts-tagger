@@ -1,24 +1,17 @@
+trigger: none
+
 pr:
   branches:
     include:
     - master
+  paths:
+    include:
+    - CI/*
+    - Tasks/*
+  autoCancel: true
 
-pool:
-  name: Default
-
-workspace:
-  clean: all
-
-steps:
+jobs:
 - template: templates/build.yml
   parameters:
-    path: Tasks/TaggerV1
-    restore: true
-    lint: true
-    build: true
-    test: true
-
-- template: templates/package.yml
-  parameters:
-    path: $(Build.SourcesDirectory)
-    version: $(Build.BuildId)
+    task: true
+    extension: true
