@@ -2,7 +2,7 @@
 
 ## 1.3.*
 
-- Add extended YAML pipelines support ([TBU](TBU))
+- Add extended YAML pipelines support ([#16](https://github.com/dmitryserbin/azdev-artifacts-tagger/pull/16))
 
 ## 1.2.*
 
