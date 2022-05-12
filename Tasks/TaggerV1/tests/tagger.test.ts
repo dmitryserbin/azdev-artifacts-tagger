@@ -43,15 +43,17 @@ describe("Tagger", () => {
 
         ];
 
-        helperMock.setup((x) => x.getBuild(
-            TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber())).returns(
-                () => Promise.resolve(buildMock));
-        helperMock.setup((x) => x.getBuildTags(
-            TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber())).returns(
-                () => Promise.resolve(tagsMock));
-        helperMock.setup((x) => x.addBuildTag(
-            TypeMoq.It.isAnyString(), TypeMoq.It.isAny(), TypeMoq.It.isAnyString())).returns(
-                () => Promise.resolve(console.log(`Adding ${buildNumber} build ${tagName} tag`)));
+        helperMock
+            .setup((x) => x.getBuild(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber()))
+            .returns(() => Promise.resolve(buildMock));
+
+        helperMock
+            .setup((x) => x.getBuildTags(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber()))
+            .returns(() => Promise.resolve(tagsMock));
+
+        helperMock
+            .setup((x) => x.addBuildTag(TypeMoq.It.isAnyString(), TypeMoq.It.isAny(), TypeMoq.It.isAnyString()))
+            .returns(() => Promise.resolve(console.log(`Adding ${buildNumber} build ${tagName} tag`)));
 
         const tagger: ITagger = new Tagger(helperMock.target);
 
@@ -81,12 +83,13 @@ describe("Tagger", () => {
 
         ];
 
-        helperMock.setup((x) => x.getBuild(
-            TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber())).returns(
-                () => Promise.resolve(buildMock));
-        helperMock.setup((x) => x.getBuildTags(
-            TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber())).returns(
-                () => Promise.resolve(tagsMock));
+        helperMock
+            .setup((x) => x.getBuild(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber()))
+            .returns(() => Promise.resolve(buildMock));
+
+        helperMock
+            .setup((x) => x.getBuildTags(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber()))
+            .returns(() => Promise.resolve(tagsMock));
 
         const tagger: ITagger = new Tagger(helperMock.target);
 
@@ -117,9 +120,9 @@ describe("Tagger", () => {
 
         } as Build;
 
-        helperMock.setup((x) => x.getDefinitionBuilds(
-            TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber(), TypeMoq.It.isAnyString())).returns(
-                () => Promise.resolve([ buildMockOne, buildMockTwo ] as Build[]));
+        helperMock
+            .setup((x) => x.getDefinitionBuilds(TypeMoq.It.isAnyString(), TypeMoq.It.isAnyNumber(), TypeMoq.It.isAnyString()))
+            .returns(() => Promise.resolve([ buildMockOne, buildMockTwo ] as Build[]));
 
         const tagger: ITagger = new Tagger(helperMock.target);
 

@@ -1,6 +1,6 @@
 import { BuildApi } from "azure-devops-node-api/BuildApi";
 import { WebApi, getPersonalAccessTokenHandler } from "azure-devops-node-api";
-import { IRequestOptions, IRequestHandler } from "azure-devops-node-api/interfaces/common/VsoBaseInterfaces";
+import { IRequestHandler, IRequestOptions } from "azure-devops-node-api/interfaces/common/VsoBaseInterfaces";
 
 import { IEndpoint } from "../interfaces/iendpoint";
 import { IApiFactory } from "../interfaces/iapifactory";

@@ -74,8 +74,9 @@ export class BuildHelper implements IBuildHelper {
 
         const verbose = logger.extend(this.addBuildTag.name);
 
-        console.log(`Adding <${build.buildNumber!}> build <${tagName}> tag`);
+        console.log(`Adding <${build.buildNumber}> build <${tagName}> tag`);
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const result = await this.buildApi.addBuildTag(projectName, build.id!, tagName);
 
         verbose(result);
@@ -88,6 +89,7 @@ export class BuildHelper implements IBuildHelper {
 
         console.log(`Removing <${build.buildNumber}> build <${tagName}> tag`);
 
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const result = await this.buildApi.deleteBuildTag(projectName, build.id!, tagName);
 
         verbose(result);

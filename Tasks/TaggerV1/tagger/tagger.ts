@@ -70,6 +70,7 @@ export class Tagger implements ITagger {
             await this.buildHelper.deleteBuildTag(artifact.projectId, build, tag);
 
         }
+
     }
 
 }
