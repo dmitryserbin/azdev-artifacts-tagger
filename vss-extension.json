@@ -44,6 +44,12 @@
     },
     "support": {
       "uri": "https://github.com/dmitryserbin/azdev-artifacts-tagger/issues"
+    },
+    "license": {
+      "uri": "https://github.com/dmitryserbin/azdev-artifacts-tagger/blob/master/LICENSE"
+    },
+    "privacypolicy": {
+      "uri": "https://github.com/dmitryserbin/azdev-artifacts-tagger/blob/master/PRIVACY.md"
     }
   },
   "repository": {
